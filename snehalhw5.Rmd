@@ -1,0 +1,62 @@
+---
+title: "SnehalHw5"
+author: "Snehal"
+date: "2023-03-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+``{r}
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+head(choco)
+```
+```{r}
+nrow(choco)
+```
+```{r}
+
+library(ggplot2)
+
+ggplot(choco, aes(x = Review.Date)) +
+  geom_bar()
+```
+```{r}
+library(ggplot2)
+
+ggplot(choco, aes(x = Rating)) +
+  geom_histogram(binwidth = 0.25, fill = "dodgerblue", color = "black") +
+  ggtitle("Distribution of Chocolate Ratings") +
+  xlab("Rating") +
+  ylab("Count")
+
+```
+
+```{r}
+library(ggplot2)
+
+# Filter data to top 3 locations
+top3 <- dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
+
+# Create a boxplot of Rating by Company.Location
+ggplot(top3, aes(x = Company.Location, y = Rating)) +
+  geom_boxplot(fill = "dodgerblue", color = "black") +
+  ggtitle("Distribution of Chocolate Ratings by Company Location") +
+  xlab("Company Location") +
+  ylab("Rating")
+
+```
+```{r}
+library(ggplot2)
+
+ggplot(choco, aes(x = Cocoa.Pct, y = Rating)) +
+  geom_point(alpha = 0.5, color = "dodgerblue") +
+  ggtitle("Rating vs. Cocoa Percentage") +
+  xlab("Cocoa Percentage") +
+  ylab("Rating")
+
+```
+
