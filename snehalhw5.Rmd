@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## R Markdown
-``{r}
+```{r}
 choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
 head(choco)
 ```
@@ -60,3 +60,74 @@ ggplot(choco, aes(x = Cocoa.Pct, y = Rating)) +
 
 ```
 
+---
+title: "hw5"
+author: "Aditi Nachnani, Snehal Arla, Tara Munjuluri"
+date: "2023-03-09"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+```{r}
+library(ggplot2)
+choco <- read.csv("https://ds202-at-isu.github.io/labs/data/choco.csv")
+head(choco)
+
+
+#Question set I
+#What is the overall number of chocolate bars rated? --> there are 1852 chocolate bars rated.
+nrow(choco)
+
+#How does the number of ratings depend on the year? Draw a bar chart of the number of reports.-->as the years increase, the count does too except around 2016 and 2017
+ggplot(choco, aes(x = Review.Date)) +
+  geom_bar()
+
+#Question set II
+
+#1. How are ratings distributed? Draw a histogram of ratings and describe it. Don’t forget to mention outliers, if there are any.--> As you can see from the graph below, most are rated between 3 to 4. The data seems to be a little skewed to the left. The outliers are the ones that lie outside most of the other values which I think are 1 and 5.
+ggplot(choco, aes(x = Rating)) +
+  geom_histogram(binwidth = 0.25, fill = "dodgerblue", color = "black") +
+  ggtitle("Distribution of Chocolate Ratings") +
+  xlab("Rating") +
+  ylab("Count")
+
+#2 Do ratings depend on the cocoa percentage of a chocolate bar?--> The data is too scattered and has no pattern so no, ratings do not depend on the cocoa percentage of a chocolate bar
+ggplot(choco, aes(x = Cocoa.Pct, y = Rating)) +
+  geom_point(alpha = 0.5, color = "dodgerblue") +
+  ggtitle("Rating vs. Cocoa Percentage") +
+  xlab("Cocoa Percentage") +
+  ylab("Rating") 
+
+
+#3 How do ratings compare across different company locations? Focus on the three locations with the most ratings: -->according to the graph, all three locations have the same median but Canada has more points in the upper quartile. France and the US both have outliers.
+
+# Filter data to top 3 locations
+top3 <- dplyr::filter(choco, Company.Location %in% c("U.S.A.", "France", "Canada"))
+
+# Create a boxplot of Rating by Company.Location
+ggplot(top3, aes(x = Company.Location, y = Rating)) +
+  geom_boxplot(fill = "dodgerblue", color = "black") +
+  ggtitle("Distribution of Chocolate Ratings by Company Location") +
+  xlab("Company Location") +
+  ylab("Rating")
+
+
+#Snehal's question
+
+#Tara's question
+
+#Aditi's question
+
+#How do review dates compare across USA, France, and Canada? -->as you can see, Canada and the USA have the same median and France has the most review dates than the other two. 
+ggplot(top3, aes(x = Company.Location, y = Review.Date)) +
+  geom_boxplot(fill = "dodgerblue", color = "black") +
+  ggtitle("Distribution of Company Location by Review Date") +
+  xlab("Company Location") +
+  ylab("Review Date")
+ 
+
+```
