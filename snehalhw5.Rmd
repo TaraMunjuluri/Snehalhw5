@@ -119,6 +119,12 @@ ggplot(top3, aes(x = Company.Location, y = Rating)) +
 #Snehal's question
 
 #Tara's question
+#What is the relationship between company location and cocoa percentages?
+ggplot(top3, aes(x = Cocoa.Pct, y = Company.Location)) +
+  geom_boxplot(fill = "dodgerblue", color = "black") +
+  ggtitle("Distribution of Company Location by Cocoa Percentage") +
+  xlab("Cocoa Percentage") +
+  ylab("Rating")
 
 #Aditi's question
 
