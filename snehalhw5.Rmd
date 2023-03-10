@@ -119,7 +119,7 @@ ggplot(top3, aes(x = Company.Location, y = Rating)) +
 #Snehal's question
 
 #Tara's question
-#What is the relationship between company location and cocoa percentages?
+#What is the relationship between company location and cocoa percentages?-->Canada has a less spread out distribution, with its minimum being less than the others while all countries maximums remain the same and have a lower minimum
 ggplot(top3, aes(x = Cocoa.Pct, y = Company.Location)) +
   geom_boxplot(fill = "dodgerblue", color = "black") +
   ggtitle("Distribution of Company Location by Cocoa Percentage") +
